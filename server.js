@@ -1,9 +1,12 @@
 const express = require('express');
+const router = express.Router();
 
 const connectDB = require('./config/db');
 
 const app = express();
 
+const swaggerUi = require('swagger-ui-express'),
+swaggerDocument = require('./swagger.json');
 // Connect Database
 connectDB();
 
@@ -11,6 +14,9 @@ connectDB();
 app.use(express.json({ extended: false }))
 
 app.get('/', (req, res)=> res.send(`API running`));
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/api/v1', router);
 
 //Define routes
 app.use('/api/users', require('./routes/api/users')); 

@@ -98,4 +98,8 @@ router.get("/", async (req, res) => {
     }
 })
 
+// @route GET api/profile
+//@desc Get all profiles 
+//@access public
+
 module.exports = router;
